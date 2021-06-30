@@ -15,18 +15,23 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-
-
+import {TaskType} from "./api/todolists-api";
 
 
 export type TasksStateType = {
-    [key: string]: Array<TodolistDomainType>
+    [key: string]: Array<TaskType>
 }
-
 
 function App() {
     let todolistId1 = v1();
     let todolistId2 = v1();
+
+  /*  let [todolists, setTodolists] = useState<Array<TodolistDomainType>>([
+        {id:todolistId1, title: "What to learn", filter: "all",   addedDate: '',
+            order:  0},
+        {id:todolistId2, title: "What to buy", filter: "all",   addedDate: '',
+            order:  0},
+    ])*/
 
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)

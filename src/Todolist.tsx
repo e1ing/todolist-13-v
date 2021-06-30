@@ -4,11 +4,11 @@ import {EditableSpan} from './EditableSpan'
 import {Button, IconButton} from '@material-ui/core'
 import {Delete} from '@material-ui/icons'
 import {Task} from './Task'
-import {FilterValuesType} from './App';
-import {TodolistType} from "./api/todolists-api";
+import {TodolistDomainType} from "./state/todolists-reducer";
+import {TaskStatuses} from "./api/todolists-api";
 
 
-export const Todolist = React.memo(function (props: TodolistType) {
+export const Todolist = React.memo(function (props: TodolistDomainType) {
     console.log('Todolist called')
 
     const addTask = useCallback((title: string) => {
@@ -30,10 +30,10 @@ export const Todolist = React.memo(function (props: TodolistType) {
     let tasksForTodolist = props.tasks
 
     if (props.filter === 'active') {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === false)
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.New)
     }
     if (props.filter === 'completed') {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === true)
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
     return <div>
